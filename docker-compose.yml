@@ -1,0 +1,19 @@
+version: '3.8'
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile_web
+    image: levandio/nginx-web-alpine
+    ports:
+      - "8080:80"
+
+  proxy:
+    build:
+      context: .
+      dockerfile: Dockerfile_proxy
+    image: levandio/nginx-proxy-alpine
+    ports:
+      - "80:80"
+    depends_on:
+      - web
